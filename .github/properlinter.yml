@@ -1,0 +1,7 @@
+on:
+  push:
+     - main
+
+jobs:
+   build:
+      runs-on: ubuntu-latest
