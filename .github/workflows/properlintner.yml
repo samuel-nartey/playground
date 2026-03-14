@@ -11,3 +11,13 @@ jobs:
       steps:
         - name: checkout code
           uses: actions/checkout@v6
+
+        - name: print a statement
+          run:  echo "checkout successful"
+
+   test:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: test your code
+          run:   echo "testing code"
