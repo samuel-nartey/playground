@@ -20,18 +20,18 @@ jobs:
 
       steps:
         - name: test your code
-          run:   this is the second job
+          run:  echo "this is the second job"
 
    security-scan:
       runs-on: ubuntu-latest
 
       steps:
         - name: job 3
-          run:  echo this is the third job
+          run:  echo "this is the third job"
 
    deploy: 
       runs-on: ubuntu-latest
 
       steps:
         - name: job 4
-          run: this is the fourth job
+          run: echo "this is the fourth job"
