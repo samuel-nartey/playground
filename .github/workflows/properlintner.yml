@@ -17,6 +17,7 @@ jobs:
 
    test:
       runs-on: ubuntu-latest
+      needs: build
 
       steps:
         - name: test your code
@@ -24,6 +25,7 @@ jobs:
 
    security-scan:
       runs-on: ubuntu-latest
+      needs: test
 
       steps:
         - name: job 3
@@ -31,6 +33,7 @@ jobs:
 
    deploy: 
       runs-on: ubuntu-latest
+      needs: security-scan
 
       steps:
         - name: job 4
