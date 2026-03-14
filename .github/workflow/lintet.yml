@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+   build:
+      runs-on: ubuntu-latest
+
+      steps:
+         - name: checkout code
+           uses: actions/checkout@v4
+
+         -  name: print statement
+            run:  echo "code checkout successful"
+
+
+    test
+       runs-on: unbuntu-latest
+
+       steps:
+          - name: perform linting
+            uses: actions/super-linter@v3
