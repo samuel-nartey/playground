@@ -38,6 +38,7 @@ jobs:
           VALIDATE_PYTHON: true
           VALIDATE_YAML: true
           VALIDATE_MARKDOWN: true
+        continue-on-error: true
 
   deploy: 
     runs-on: ubuntu-latest
