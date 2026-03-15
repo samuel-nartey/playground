@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     name: first job
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: checkout code
@@ -16,7 +16,7 @@ jobs:
         run:  echo "checkout successful"
     
   test:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: build
 
     steps:
