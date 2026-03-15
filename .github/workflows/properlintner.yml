@@ -4,45 +4,45 @@ on:
       - main
 
 jobs:
-   build:
-      name: first job
-      runs-on: self-hosted
+  build:
+    name: first job
+    runs-on: self-hosted
 
-      steps:
-        - name: checkout code
-          uses: actions/checkout@v6
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v6
 
-        - name: print a statement
-          run:  echo "checkout successful"
+      - name: print a statement
+        run:  echo "checkout successful"
+    
+  test:
+    runs-on: self-hosted
+    needs: build
 
-   test:
-      runs-on: self-hosted
-      needs: build
+    steps:
+      - name: test your code
+        run:  echo "this is the second job"
 
-      steps:
-        - name: test your code
-          run:  echo "this is the second job"
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: test
 
-   security-scan:
-      runs-on: ubuntu-latest
-      needs: test
-
-      steps:
-        - name: job 3
-          uses:  actions/checkout@v6
+    steps:
+      - name: job 3
+        uses:  actions/checkout@v6
         
-        - name: Super-Linter
-          uses: super-linter/super-linter@v7.1.0
-          env:
-            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-            VALIDATE_PYTHON: true
-            VALIDATE_YAML: true
-            VALIDATE_MARKDOWN: true
+      - name: Super-Linter
+        uses: super-linter/super-linter@v7.1.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          VALIDATE_PYTHON: true
+          VALIDATE_YAML: true
+          VALIDATE_MARKDOWN: true
 
-   deploy: 
-      runs-on: ubuntu-latest
-      needs: security-scan
+  deploy: 
+    runs-on: ubuntu-latest
+    needs: security-scan
 
-      steps:
-        - name: job 4
-          run: echo "this is the fourth job"
+    steps:
+      - name: job 4
+        run: echo "this is the fourth job"
