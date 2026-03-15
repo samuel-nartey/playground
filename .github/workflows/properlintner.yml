@@ -29,7 +29,10 @@ jobs:
 
       steps:
         - name: job 3
-          run:  echo "this is the third job"
+          uses:  actions/checkout@v6
+        
+        - name: Super-Linter
+          uses: super-linter/super-linter@v7.1.0
 
    deploy: 
       runs-on: ubuntu-latest
