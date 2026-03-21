@@ -1,49 +1,21 @@
+name: gitleaks
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
 
 jobs:
-  build:
-    name: first job
+  scan:
+    name: gitleaks
     runs-on: ubuntu-latest
-
     steps:
-      - name: checkout code
-        uses: actions/checkout@v6
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: print a statement
-        run:  echo "checkout successful"
-    
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: test your code
-        run:  echo "this is the second job"
-
-  security-scan:
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-      - name: job 3
-        uses:  actions/checkout@v6
-        
-      - name: Super-Linter
-        uses: super-linter/super-linter@v7.1.0
+      - name: Run gitleaks scan
+        uses: gitleaks/gitleaks-action@v2
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          VALIDATE_PYTHON: true
-          VALIDATE_YAML: true
-          VALIDATE_MARKDOWN: true
-        continue-on-error: true
-
-  deploy: 
-    runs-on: ubuntu-latest
-    needs: security-scan
-
-    steps:
-      - name: job 4
-        run: echo "this is the fourth job"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # Only required for organizations
+          GITLEAKS_NOTIFY_USER_LIST: "samuelnarteyotuafo@gmail.com,narteyotuafosamuel@gmail.com" # Users to notify via GitHub
